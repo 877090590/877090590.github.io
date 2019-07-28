@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档 | Hexo</title>
+  <meta name="keywords" content>
+  <meta name="description" content="Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="管理项目中对象 ，无缝整合 IoC AOP 控制反转 面向切面 在spring的主配置xml文件中，配置bean属性 如图，配置好了bean类 获取配置文件的三种方法  ApplicationContext ac = new ClassPathXmlApplicationContext(“application.xml”);//User user = (User) ac.getBean(“user">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/Spring/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="管理项目中对象 ，无缝整合 IoC AOP 控制反转 面向切面 在spring的主配置xml文件中，配置bean属性 如图，配置好了bean类 获取配置文件的三种方法  ApplicationContext ac = new ClassPathXmlApplicationContext(“application.xml”);//User user = (User) ac.getBean(“user">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-28T12:36:28.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档">
+<meta name="twitter:description" content="管理项目中对象 ，无缝整合 IoC AOP 控制反转 面向切面 在spring的主配置xml文件中，配置bean属性 如图，配置好了bean类 获取配置文件的三种方法  ApplicationContext ac = new ClassPathXmlApplicationContext(“application.xml”);//User user = (User) ac.getBean(“user">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>John Doe</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/877090590" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=877090590&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(2)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a style="border-right: 1px solid #fff; width: 49%"  class="about site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="2">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="/www.baidu.com">百度</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/2019/07/28/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2019-07-28 17:56:50">2019/07/28</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/07/28/Spring/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档">Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档</span>
+            <span class="post-date" title="2019-07-28 20:29:55">2019/07/28</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Spring" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-07-28 20:36:28'>2019-07-28 20:29</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>管理项目中对象 ，无缝整合 IoC AOP 控制反转 面向切面</p>
+<p>在spring的主配置xml文件中，配置bean属性<br><bean name="user" class="cn.susuper.bean.User"></bean></p>
+<p>如图，配置好了bean类</p>
+<p>获取配置文件的三种方法 </p>
+<p>ApplicationContext ac = new ClassPathXmlApplicationContext(“application.xml”);<br>//User user = (User) ac.getBean(“user”);<br>User user = (User)ac.getBean(User.class); //两种获取bean的方式<br>System.out.println(user);</p>
+<p>IoC控制反转 反转：原本是new对象，现在这份工作由我们自己反转给Spring执行<br>控制：由spring帮我们创建销毁对象，掌控对象的生命周期，我们在需要使用时申请即可</p>
+<p>控制反转只能创建，但是没有属性，所以使用了DI这门技术，注入属性<br>DI 依赖注入   property<br><bean name="user" class="cn.susuper.bean.User"><br>    <property name="id" value="2"></property><br></bean> </p>
+<p>set方法注入、构造注入<br>属性注入<br>注入类型<br>八大基本数据类型</p>
+<p>spring配置<br>xml配置<br>bean标签：创建方式：空参构造，静态工厂，动态工厂<br>name是起名字,通过name获取对象，getBean(“name”)，可以使用特殊字符，可以重复（不推荐）<br>id和name作用基本相同，不推荐使用，不支持特殊字符和重复<br>class 类管理对象的全包名，spring会通过这个包名来创建对象</p>
+<p>bean标签创建默认使用空参构造，可以在重写空参方法，在其中加入打印验证，当修改空参构造，改为带参时，程序报错，此时可再写一个空参构造即可，或在bean标签中声明参数类型</p>
+<p>ApplicationContext当加载时候，会加载所有bean的空参构造，以方便程序后面申请，但是当bean过多的时候，会导致内存爆炸<br>bean中标签<br>此时引入懒加载，lazy-init  true为创建时不加载，false，default，延迟加载<br>scope 单例，多例  prototype（每次都创建新的，调用构造方法），只创建一个对象（singleton单例默认值）   request（web环境下， 创建出来，生命周期和request请求一样，session也是和session），一般项目中采用默认值</p>
+<p>init-method和destory-method标签：在bean中写一个方法，在init-method中写入此方法，当初始化构造方法后，就执行此方法,单例和多例会有不同情况，多例情况下，不执行销毁方法；销毁方法的话，是执行关闭容器后，执行此方法，ac.close()</p>
+<p>bean中set注入 写set方法<br><property name="id" value="1"></property><br> id为变量名（跟bean中具体变量相同）</p>
+<p>注入引用类型  bean标签写一个，然后在主bean标签中的property属性中value由ref取代<br>value是注入值类型 ref是注入引用类型<br>构造方法注入<br><constructor-arg name="username" value="lay" type="javax.lang" index="0"></constructor-arg></p>
+<p>多个构造重载的解决方法：type是指参数的类型 index指参数所在位置</p>
+<p>复杂类型注入<br>&lt;proverty name=”array&gt;<br><array><br><value>123</value><br></array><br><br>或者此时可省略array&lt;proverty name=”array ref=“”&gt;</p>
+<p>array set list 可以相互替代<br>map properties可以相互替代<br><map><br><entry key="“username”" value="“123”"><br><entry key="“dog”" value-ref="“二哈”"><br></entry></entry></map></p>
+<p>spring的注解配置<br>&lt;context:component-scan base-package=”cn.susuper”&gt;扫描<br>类上注解<br>@Component 扫描该类型  @Controller @Service  @Repository<br>@Scope(scopeName=”prototype”)  //单例多例</p>
+<p>方法上注解<br>@PostConstruct() 初始化用<br>@PreDestroy() 销毁用</p>
+<p>变量 在set方法上<br>@Value(value=””)<br>引用类型   自动装配 类似ref，但是在ref中原来类型还是需要在set中写value<br>@Autowired<br>当既在xml中配置了，又写了@Autowired，此时会出现一对多   可以用@Resource(name=””)知名具体要引入的bean，fg：bean为宠物，有猫狗两个，此时用@Autowired 报错，用@Resource(name=”cat”)就可以指定唯一，在xml中为配置cat在bean自身用<br>@Component(“dog”)配置狗</p>
+<p>springjunit测试<br>@RunWith(SpringJUnit4ClassRunner.class)<br>@ContextConfiguration(“classpath:applicationannotation.xml”)</p>
+<p>分包配置 注意路径 import导入其他配置文件</p>
+<p>配置 contextLoaderListener监听器，就可以使spring容器随着web项目启动而启动<br>servletContext是最大的域，他的生命周期和web的生命周期一样，配置他的监听器，就能控制spring的初始化和销毁<br>配置监听器<br><listener><br>  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class><br></listener><br>获取spring.xml配置文件<br><context-param><br>  <param-name>contextConfigLocation</param-name><br>  <param-value>classpath:applicationtest.xml</param-value><br></context-param></p>
+<p>原来的获取service方法<br>ApplicationContext ac = new ClassPathXmlApplicationContext(“applicationtest.xml”);<br>userService =(UserService) ac.getBean(“userService”);</p>
+<p>当使用servletContext监听器后的获取方法<br>ServletConrtextListener可以通过配置监听器来达到我们的需求，<br>在web项目创建的时候创建spring容器，销毁时关闭spring容器<br>WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(getServletContext());<br>userService = (UserService)wac.getBean(“userService”);</p>
+<p>AOP 方法增强<br>面向切面编程，将纵向重复代码，横向抽取解决，简称：横切<br>Proxy动态代理：被代理的对象必须要实现接口<br>Cglib动态代理：被代理的对象不能被final修饰，基于继承 （第三方的动态代理）<br>优先选用Proxy动态代理<br>public class UserServiceProxy {<br>    public UserService getUserServiceProxy(UserService us){</p>
+<pre><code>    return  (UserService)Proxy.newProxyInstance(UserServiceProxy.class.getClassLoader(),
+            UserServiceImpl.class.getInterfaces(), new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    //增强代码
+                    System.out.println(&quot;开启事务&quot;);
+                    //调用原始代码
+                    Object obj = method.invoke(us,args);
+                    System.out.println(&quot;事务回滚&quot;);
+                    return obj;
+                }
+            });
+}</code></pre><p>}</p>
+<p>调用<br>public void Run1(){<br>    UserServiceProxy usProxy = new UserServiceProxy();<br>    UserService us = new UserServiceImpl();<br>    UserService userServiceProxy = usProxy.getUserServiceProxy(us);<br>    userServiceProxy.delete();<br>}</p>
+<p>原始方法都是连接点，切入点是可以被增强的方法，通知/增强指代理方法<br>中的代码，切面将代理方法引入到方法，目标对象就是被代理对象，织入<br>把切面的代码应用到目标对象来创建新的代理对象的过程，代理指通过此过程<br>生成的增强后的代理对象</p>
+<p>代理写小学生暑假作业，3年级以下<br>目标对象  UserService(小学生作业)<br>被代理对象  被UserServiceProxy增强后的UserService(用你的知识去写的作业)<br>JoinPoint 连接点 目标对象中，哪些方法会被拦截；save，delete，update，find (所有要写的作业：数学、语文、英语、王者荣耀代上王者)<br>Pointcut 切入点 筛选连接点，你最终要增强的方法；save，update，delete (小学生只让你给写数学语文英语，王者荣耀他自己上王者)<br>Advice 通知/增强 要执行的增强代码 (你用你N年积攒的知识去完成小学暑假作业)<br>Introduction 介入/引入 在执行时期动态加入一些方法或行为<br>Aspect 切面 通知 + 切入点，通知应用到哪个切点<br>target 目标 被代理对象 (小学生的作业)<br>weaving 织入 把切面的代码应用到目标对象来创建新的代理对象的过程 (将你的脑子应用到写小学生的暑假作业上)<br>proxy 代理 把切面的代码应用到目标对象来创建新的代理对象(利用你的知识去完成作业)       </p>
+<p>5中aop的通知方式<br>i. before 前置通知<br>ii. after 最终通知（后置通知）<br>iii. afterReturning 成功通知（后置通知）<br>iv. afterThrowing 异常通知（后置通知）<br>v. around 环绕通知</p>
+<!-- 目标对象 -->
+<p><bean name="userService" class="com.susuper.service.UserServiceImpl"></bean></p>
+<!-- 通知对象 -->
+<p><bean name="myAdvice" class="com.susuper.aop.MyAdvice"></bean><br><a href="aop:config" target="_blank" rel="noopener">aop:config</a><br>    &lt;!– 切入点  expression 切入点表达式 可以配置要增强的方法<br>public void com.susuper.service.UserServiceImpl.save()</p>
+<ul>
+<li><p>com.susuper.service.<em>ServiceImpl.</em>(..)   ..为参数<br>id 就是唯一标识<br>  –&gt;<br>  &lt;aop:pointcut expression=”execution(* com.susuper.service.<em>ServiceImplabc.</em>(..))” id=”servicePc”/&gt;</p>
+  <!-- 切面 通知+切入点 -->
+<p>  &lt;aop:aspect ref=”myAdvice”&gt;</p>
+<pre><code>&lt;!-- 通知类型 --&gt;
+&lt;aop:before method=&quot;before&quot; pointcut-ref=&quot;servicePc&quot;/&gt;
+&lt;!-- 最终通知 后置通知 --&gt;
+&lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;servicePc&quot;/&gt;
+&lt;!-- 成功通知 后置通知 --&gt;
+&lt;aop:after-returning method=&quot;afterReturning&quot; pointcut-ref=&quot;servicePc&quot;/&gt;
+&lt;!-- 异常通知 后置通知 --&gt;
+&lt;aop:after-throwing method=&quot;afterThrowing&quot; pointcut-ref=&quot;servicePc&quot;/&gt;
+&lt;!-- 环绕通知 --&gt;
+&lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;servicePc&quot;/&gt;</code></pre><p>  <br></p>
+</li>
+</ul>
+<p>//before 前置通知 在目标方法前调用<br>public void before() {<br>    System.out.println(“before”);<br>}</p>
+<p>//after 最终通知（后置通知）在目标方法后调用，无论是否出现异常都会执行 finally<br>public void after() {<br>    System.out.println(“after”);<br>}</p>
+<p>//afterReturning 成功通知（后置通知）在目标方法执行后，并且执行成功，如果方法出现异常则不调用<br>public void afterReturning() {<br>    System.out.println(“afterReturning”);<br>}</p>
+<p>//afterThrowing 异常通知（后置通知）在目标方法执行出现异常的时候才会调用<br>public void afterThrowing() {<br>    System.out.println(“afterThrowing”);<br>}</p>
+<p>//around 环绕通知 需要我们手动调用目标方法，并且可以设置通知<br>public Object around(ProceedingJoinPoint pjp) throws Throwable {<br>    System.out.println(“around before”);<br>    Object proceed = pjp.proceed();<br>    System.out.println(“around after”);<br>    return proceed;<br>}</p>
+<p>JdbcTemplate的写法<br>private static ComboPooledDataSource dataSource;<br>static {<br>    //配置c3p0   //连接数据库 c3p0<br>    try {<br>        dataSource = new ComboPooledDataSource();<br>        dataSource.setDriverClass(“com.mysql.jdbc.Driver”);<br>        dataSource.setJdbcUrl(“jdbc:mysql://localhost:3306/ssm_spring_servlet”);<br>        dataSource.setUser(“root”);<br>        dataSource.setPassword(“root”);<br>    } catch (PropertyVetoException e) {<br>        e.printStackTrace();<br>    }<br>}<br>@Override<br>public User selectUserById(Integer id) {<br>    String sql = “select * from user where u_id=?”;<br>    JdbcTemplate jc = new JdbcTemplate(dataSource);<br>    User user = jc.queryForObject(sql, new RowMapper<user>() {<br>        @Override<br>        public User mapRow(ResultSet resultSet, int i) throws SQLException {<br>            User u = new User();<br>            u.setU_id(resultSet.getInt(“u_id”));<br>            u.setU_username(resultSet.getString(“u_username”));<br>            u.setU_password(resultSet.getString(“u_password”));<br>            return u;<br>        }<br>    },id);<br>    return user;<br>}</user></p>
+<p>JdbcDaoSupport   getJdbcTemplate() ，配置文件中对JdbcDaoSupport中dataSource属性进行配置即可<br>原来的<br><bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"><br>    <property name="driverClass" value="com.mysql.jdbc.Driver"><br>    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm_spring"><br>    <property name="user" value="root"><br>    <property name="password" value="123"><br></property></property></property></property></bean></p>
+<p>读取配置文件<br>context:property-placeholder location=”db.properties”/&gt;</p>
+<!-- 配置 dataSource -->
+<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="${jdbc.driverClass}">
+    <property name="jdbcUrl" value="${jdbc.jdbcUrl}">
+    <property name="user" value="${jdbc.user}">
+    <property name="password" value="${jdbc.password}">
+</property></property></property></property></bean>
+
+
+<p>spring的aop事务，acid 原子性</p>
+<!--配置事务核心管理器，不同平台不一样-->
+<bean name="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+</bean>
+<!--事务通知-->
+<tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
+    <tx:attributes>
+        <tx:method name="tran" isolation="DEFAULT" read-only="false" propagation="REQUIRED">
+        <!--隔离级别：默认 数据库访问级别,如果是select一类，就可以只可true，update的用false 传播级别-->
+    </tx:method></tx:attributes>
+</tx:advice>
+<!--配置AOP-->
+<aop:config>
+    <aop:pointcut expression="execution(* cn.transaction.service.AccountServiceImpl.*(..)) " id="txPc">
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"></aop:advisor>
+</aop:pointcut></aop:config>
+
+<p>aspectjweaver需要导入的包//此处出过错</p>
+<!--配置事务核心管理器，不同平台不一样-->
+<bean name="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+</bean>
+<!--注解加载的方式-->
+<tx:annotation-driven transaction-manager="dataSourceTransactionManager">
+
+
+<p>方法上写此注解，如果此类中需要开启的方法多，可以把此注解放到类上<br>则类中所有方法都会受到此注解影响， （当readonly在类上跟具体方法的<br>要求不同时，可以单独在方法上再次声明）<br>@Transactional(isolation= Isolation.DEFAULT,propagation = Propagation.REQUIRED,readOnly = false)</p>
+</tx:annotation-driven>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2019gjd@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-07-28, 20:29:55</p>
+    <p><span class="copy-title">最后更新:</span>2019-07-28, 20:36:28</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/07/28/Spring/" title="Spring框架的一些知识点的复习，平时没事多回来反复查阅这篇文档">http://yoursite.com/2019/07/28/Spring/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 gjd</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
